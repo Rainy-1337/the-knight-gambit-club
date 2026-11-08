@@ -80,7 +80,7 @@
 
     <div class="form-wrap reveal-scale" id="formWrap">
       <form id="regForm" novalidate>
-        <!-- Formspree sends the submission to the club's email. Replace YOUR_FORM_ID (see README). -->
+        <!-- Formspree sends the submission to the club's email. -->
         <input type="hidden" name="_subject" value="New Knightmare Gambit membership registration" />
         <input type="hidden" name="_template" value="table" />
 
@@ -133,8 +133,11 @@
 
   <script>
     // ---- CONFIGURATION ----
-    // Create a free form at https://formspree.io, confirm your email, then paste the form ID here.
+    // Formspree form endpoint. Sends each registration to the club's email.
     const FORM_ENDPOINT = "https://formspree.io/f/xgaajebb";
+
+    // Key used to remember that this browser has already registered
+    const REG_KEY = "kgRegistered";
 
     // ---- Navbar shrinks/darkens on scroll ----
     const nav = document.getElementById("nav");
@@ -184,6 +187,11 @@
       f.input.addEventListener("input", () => { if (f.el.classList.contains("invalid")) f.el.classList.toggle("invalid", !f.ok(f.input.value)); });
     });
 
+    // ---- Returning visitors: hide the form if this browser already registered ----
+    if (localStorage.getItem(REG_KEY)) {
+      document.getElementById("formWrap").classList.add("done");
+    }
+
     // ---- Submit: sends the data to the club's email via Formspree ----
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -212,6 +220,7 @@
         if (!res.ok) throw new Error("Request failed");
         document.getElementById("formWrap").classList.add("done");
         form.reset();
+        localStorage.setItem(REG_KEY, new Date().toISOString());
       } catch (err) {
         alert("Sorry, your registration could not be sent. Please check your connection and try again.");
       } finally {
