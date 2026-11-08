@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Announcements | Knight Gambit Chess Club</title>
+  <link rel="icon" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="nav scrolled" id="nav">
+    <a href="index.html" class="nav-brand">
+      <img src="logo.png" alt="Knight Gambit Chess Club logo" />
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#register" class="btn btn-gold btn-small">Register</a>
+    </nav>
+  </header>
+
+  <section class="page-hero">
+    <span class="eyebrow">Stay Informed</span>
+    <h1>Announcements</h1>
+    <p>Tournaments, training sessions and news from the club.</p>
+  </section>
+
+  <main class="ann-list" id="list"></main>
+
+  <div style="text-align:center; padding: 0 6vw 110px;" class="reveal">
+    <a href="index.html#register" class="btn btn-gold">Join the Club</a>
+  </div>
+
+  <footer>
+    <span class="serif">Knight Gambit Chess Club</span>
+    <p>&copy; <span id="year"></span> &middot; Strategy &middot; Honor &middot; Excellence</p>
+  </footer>
+
+  <script>
+    // ---- EDIT ANNOUNCEMENTS HERE: newest first ----
+    const announcements = [
+      {
+        date: "November 2026",
+        tag: "Tournament",
+        title: "Autumn Open Championship",
+        text: "Our annual open tournament is open to all members. Seven rounds, Swiss system, with trophies for the top three players."
+      },
+      {
+        date: "Every Thursday",
+        tag: "Training",
+        title: "Opening Workshop",
+        text: "Weekly session on openings and principles, led by senior members. Beginners and advanced players are welcome."
+      },
+      {
+        date: "Coming soon",
+        tag: "Community",
+        title: "Welcome New Knights",
+        text: "New members are invited to our first social evening: blitz games, refreshments and an introduction to the club's leadership."
+      }
+    ];
+
+    const list = document.getElementById("list");
+    list.innerHTML = announcements.map((a, i) => `
+      <article class="ann reveal ${i % 2 ? "delay-1" : ""}">
+        <div class="meta">
+          <span class="tag">${a.tag}</span>
+          <span class="date">${a.date}</span>
+        </div>
+        <h2>${a.title}</h2>
+        <p>${a.text}</p>
+      </article>
+    `).join("");
+
+    // Navbar darkens on scroll
+    const nav = document.getElementById("nav");
+    window.addEventListener("scroll", () => nav.classList.toggle("scrolled", window.scrollY > 40), { passive: true });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add("visible"); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

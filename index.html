@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Knight Gambit Chess Club</title>
+  <meta name="description" content="Knight Gambit Chess Club: strategy, tradition and friendly competition. Register to join the club." />
+  <link rel="icon" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav-brand">
+      <img src="logo.png" alt="Knight Gambit Chess Club logo" />
+    </a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#register">Register</a>
+      <a href="announcements.html" class="btn btn-outline btn-small">Announcements</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-board"></div>
+    <div class="hero-content">
+      <img class="hero-logo" src="logo.png" alt="Knight Gambit Chess Club" />
+      <span class="eyebrow">Est. for the love of the game</span>
+      <h1>Where <em>strategy</em> meets<br />noble tradition</h1>
+      <p class="lead">Sharpen your mind, meet fellow strategists and play the game the way it was meant to be played.</p>
+      <div class="hero-actions">
+        <a href="#register" class="btn btn-gold">Join the Club</a>
+        <a href="announcements.html" class="btn btn-outline">View Announcements</a>
+      </div>
+    </div>
+    <div class="scroll-cue"><div class="mouse"></div>Scroll</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-head reveal">
+      <span class="eyebrow">Our Club</span>
+      <h2>Tradition, Discipline, Honor</h2>
+      <p>Every move is a decision. Every game is a lesson. We bring together players of every level to learn, compete and grow.</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="grid-3">
+      <article class="card reveal-left">
+        <div class="icon">&#9822;</div>
+        <h3>Training</h3>
+        <p>Structured sessions on openings, tactics and endgames, guided by experienced members.</p>
+      </article>
+      <article class="card reveal delay-1">
+        <div class="icon">&#9813;</div>
+        <h3>Tournaments</h3>
+        <p>Regular internal and inter-faculty tournaments with rankings, trophies and bragging rights.</p>
+      </article>
+      <article class="card reveal-right delay-2">
+        <div class="icon">&#9816;</div>
+        <h3>Community</h3>
+        <p>A welcoming circle of thinkers, friends and rivals who share a passion for the 64 squares.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- REGISTRATION -->
+  <section class="register" id="register">
+    <div class="section-head reveal">
+      <span class="eyebrow">Membership</span>
+      <h2>Become a Knight</h2>
+      <p>Fill in the form below to register. The board will be notified and will contact you.</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="form-wrap reveal-scale" id="formWrap">
+      <form id="regForm" novalidate>
+        <!-- Formspree sends the submission to the club's email. Replace YOUR_FORM_ID (see README). -->
+        <input type="hidden" name="_subject" value="New Knight Gambit membership registration" />
+        <input type="hidden" name="_template" value="table" />
+
+        <div class="field" id="f-name">
+          <label for="fullName">Full name</label>
+          <input id="fullName" name="full_name" type="text" placeholder="e.g. Youssef El Amrani" autocomplete="name" required />
+          <div class="error">Please enter your full name (at least 3 characters).</div>
+        </div>
+
+        <div class="field" id="f-cin">
+          <label for="cin">CIN (National ID)</label>
+          <input id="cin" name="cin" type="text" placeholder="e.g. AB123456" maxlength="10" autocomplete="off" required />
+          <div class="error">Please enter a valid CIN (1 or 2 letters followed by 5 to 8 digits).</div>
+        </div>
+
+        <div class="field" id="f-filiere">
+          <label for="filiere">Filière (field of study)</label>
+          <select id="filiere" name="filiere" required>
+            <option value="">Select your filière</option>
+            <option>Computer Science</option>
+            <option>Engineering</option>
+            <option>Mathematics</option>
+            <option>Physics &amp; Chemistry</option>
+            <option>Economics &amp; Management</option>
+            <option>Law</option>
+            <option>Medicine</option>
+            <option>Literature &amp; Humanities</option>
+            <option>Other</option>
+          </select>
+          <div class="error">Please choose your filière.</div>
+        </div>
+
+        <button type="submit" class="btn btn-gold" id="submitBtn">Submit Registration</button>
+        <p class="form-note">Your information is used only for club registration.</p>
+      </form>
+
+      <div class="success" id="success">
+        <div class="seal">&#9818;</div>
+        <h3>Welcome to the Club</h3>
+        <p>Your registration has been received. Check the announcements for upcoming sessions.</p>
+        <a href="announcements.html" class="btn btn-gold">Go to Announcements</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="serif">Knight Gambit Chess Club</span>
+    <p>&copy; <span id="year"></span> &middot; Strategy &middot; Honor &middot; Excellence</p>
+  </footer>
+
+  <script>
+    // ---- CONFIGURATION ----
+    // Create a free form at https://formspree.io, confirm your email, then paste the form ID here.
+    const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+    // ---- Navbar shrinks/darkens on scroll ----
+    const nav = document.getElementById("nav");
+    const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    // ---- Scroll reveal animations ----
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          e.target.querySelectorAll(".divider").forEach((d) => d.classList.add("visible"));
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale").forEach((el) => observer.observe(el));
+
+    // ---- Card spotlight follows the mouse ----
+    document.querySelectorAll(".card").forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--x", ((e.clientX - r.left) / r.width) * 100 + "%");
+        card.style.setProperty("--y", ((e.clientY - r.top) / r.height) * 100 + "%");
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ---- Form validation ----
+    const form = document.getElementById("regForm");
+    const fields = {
+      name: { el: document.getElementById("f-name"), input: document.getElementById("fullName"),
+        ok: (v) => v.trim().length >= 3 },
+      cin: { el: document.getElementById("f-cin"), input: document.getElementById("cin"),
+        ok: (v) => /^[A-Za-z]{1,2}[0-9]{5,8}$/.test(v.trim()) },
+      filiere: { el: document.getElementById("f-filiere"), input: document.getElementById("filiere"),
+        ok: (v) => v !== "" },
+    };
+
+    // Uppercase the CIN as the user types
+    fields.cin.input.addEventListener("input", (e) => { e.target.value = e.target.value.toUpperCase().replace(/\s/g, ""); });
+
+    Object.values(fields).forEach((f) => {
+      f.input.addEventListener("blur", () => f.el.classList.toggle("invalid", !f.ok(f.input.value)));
+      f.input.addEventListener("input", () => { if (f.el.classList.contains("invalid")) f.el.classList.toggle("invalid", !f.ok(f.input.value)); });
+    });
+
+    // ---- Submit: sends the data to the club's email via Formspree ----
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      let valid = true;
+      Object.values(fields).forEach((f) => {
+        const ok = f.ok(f.input.value);
+        f.el.classList.toggle("invalid", !ok);
+        if (!ok) valid = false;
+      });
+      if (!valid) return;
+
+      const btn = document.getElementById("submitBtn");
+      const original = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = "Sending...";
+
+      const data = new FormData(form);
+      data.set("cin", fields.cin.input.value.trim());
+
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: data,
+        });
+        if (!res.ok) throw new Error("Request failed");
+        document.getElementById("formWrap").classList.add("done");
+        form.reset();
+      } catch (err) {
+        alert("Sorry, your registration could not be sent. Please check your connection and try again.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    });
+  </script>
+</body>
+</html>
